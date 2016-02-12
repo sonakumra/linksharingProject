@@ -17,7 +17,9 @@ class UserSpec extends Specification {
 
     void "test username and email"() {
         setup: "user creating email"
-        User user = new User()
+        User user = new User( firstName : firstName, lastName : lastName, email: email, password : password,username:username)
+
+        println" hello"
 
         when: "check for valiation"
         Boolean result = user.validate()
@@ -26,12 +28,31 @@ class UserSpec extends Specification {
         result == valid
 
         where: "trying different values"
-        sno | firstName | lastName | email | password | valid
-        1 | " " | "hello" | "a@b.com" | "123456" | false
-        2 | "sona" | "hello" | "sona" | "12345" | false
-        3 | "sona" | "hello" | "sona" | "12345" | false
-        4 | "hello" | "hello" | "a@b.com" | "12345" | true
+        sno |username| firstName | lastName | email | password | valid
+        1 |"sona"| "abc" | "xyz" | "sona@yahoo.com" | "qwertyw" | true
 
 
+
+    }
+    def "check email should be unique"(){
+        setup:
+        String email = "sona@tothenew.com"
+        String password = 'password'
+         User user = new User(firstName: "sona", lastName: "Kumra", email: email, password: password,username: "abc")
+
+        when:
+        user.save()
+
+        then:
+        user.count() == 1
+
+        when:
+        User newUser = new User(firstName: "abc", lastName: "xyz", email: email, password: password,username:"zwy")
+        newUser.save()
+
+        then:
+        User.count() == 1
+        newUser.errors.allErrors.size() == 1
+        newUser.errors.getFieldErrorCount('email') == 1
     }
 }

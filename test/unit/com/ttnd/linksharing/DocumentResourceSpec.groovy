@@ -15,6 +15,24 @@ class DocumentResourceSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
+    void "file path not be null"() {
+
+        setup: "user added resourse document"
+        User user = new User(firstName: "sona", lastName: "Kumra", email: "a@b.com", password: "qwerty", username: "abc")
+        Topic topic = new Topic(name: "grails", visibility: Visibility.PRIVATE, createdBy: user)
+        DocumentResource documentResource = new DocumentResource(filePath: filepath, description: "this is helpfull", topic: topic, createdBy: user)
+
+        when: "check for validation"
+        Boolean result = documentResource.validate()
+
+        then: "test the result"
+        result == valid
+
+        where: "trying different values"
+
+        sno | filepath | valid
+        1 | " " | false
+        2 | null | false
+        3 | "/home/sona" | true
     }
 }

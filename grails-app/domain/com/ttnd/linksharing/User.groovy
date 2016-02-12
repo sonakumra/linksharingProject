@@ -11,6 +11,7 @@ class User {
     Boolean active;
     Date lastUpdated;
     Date dateCreated;
+
     static transients = ['name']
 
 
@@ -22,7 +23,7 @@ class User {
         admin nullable: true
         active nullable: true
         photo nullable: true
-
+        username blank:false
 
 
     }
@@ -34,6 +35,6 @@ class User {
 
     }
     static mapping = {
-        photo type: 'longblob'
+        photo sqlType: 'longblob'
     }
 }

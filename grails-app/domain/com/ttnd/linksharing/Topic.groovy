@@ -11,8 +11,8 @@ class Topic {
 
     static constraints = {
         name blank: false,unique:'createdBy'
-       // visibility(inlist: visibility.values() as List); //ask
+       visibility(inlist: Visibility.values() as List );
     }
-    static belongsTo = [createdBy:User]
+
     static hasMany = [subsciptions:Subscription,resources:Resources]
 }
