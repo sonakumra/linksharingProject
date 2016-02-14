@@ -7,9 +7,9 @@
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-// if (System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
+//if (System.properties["${linksharing.groovy}.config.location"]) {
+    //grails.config.locations << "file:" + System.properties["${linksharing.groovy}.config.location"]
+ //}
 
 grails.project.groupId = 'com.ttnd.linksharing' // change this to alter the default package name and Maven publishing destination
 grails.sample="Sample text inside config.groovy"
