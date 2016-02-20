@@ -7,11 +7,15 @@ abstract class Resources {
     Date lastUpdated;
     Date dateCreated;
     static mapping = {
-        description(type:'text')
+        description(type: 'text')
     }
 
     static constraints = {
     }
-    static hasMany = [rating:ResourceRating,readingItems:ReadingItem]
-    static belongsTo = [topic:Topic]
+    static hasMany = [rating: ResourceRating, readingItems: ReadingItem]
+
+    String toString() {
+        return "${topic} has resource -> ${description}"
+    }
+    static belongsTo = [topic: Topic]
 }

@@ -34,6 +34,10 @@ class User {
         [this.firstName,this.lastName].join(' ')
 
     }
+    String toString(){
+        return username
+    }
+
     static mapping = {
         photo sqlType: 'longblob'
     }

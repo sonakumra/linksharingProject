@@ -13,4 +13,7 @@ class Subscription {
     static constraints = {user unique:'topic'
     }
     static  belongsTo = [user:User]
+    String toString(){
+        return "${user} subscribed ${topic}"
+    }
 }
