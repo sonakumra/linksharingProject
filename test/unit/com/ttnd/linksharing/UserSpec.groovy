@@ -67,4 +67,24 @@ class UserSpec extends Specification {
         newUser.errors.allErrors.size() == 1
         newUser.errors.getFieldErrorCount('email') == 1
     }
+
+
+    def "Checking the toString method"() {
+        given: "User"
+        User user = new User(email: "abc@thn.com", firstName: "Jai", lastName: "Ho", password: "Hellopoiyt", username: userName)
+
+        when: ""
+        String result = user.toString()
+
+        then:
+        result == resultantString
+
+        where:
+        userName  | resultantString
+        "Krishna" | "Krishna"
+        ""        | null    //?????
+        null      | null
+
+
+    }
 }

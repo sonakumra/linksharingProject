@@ -116,4 +116,5 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
            'com.ttnd.linksharing'
+            info 'grails.app'
 }

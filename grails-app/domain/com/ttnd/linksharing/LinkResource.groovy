@@ -6,5 +6,8 @@ class LinkResource extends Resources {
     static constraints = {
         url url: true
     }
+    String toString(){
+        return "Url is :${url}"
+    }
 
 }

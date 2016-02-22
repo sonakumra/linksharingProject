@@ -16,4 +16,7 @@ class Subscription {
     String toString(){
         return "${user} subscribed ${topic}"
     }
+    void some(){
+        user.topics
+    }
 }

@@ -1,3 +1,5 @@
+import com.ttnd.linksharing.LoginController
+
 class UrlMappings {
 
 	static mappings = {
@@ -7,7 +9,9 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+     //  "/"(view:"/index")
         "500"(view:'/error')
+        "/"(controller: "login", action: "index")
+
 	}
 }

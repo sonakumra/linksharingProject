@@ -35,4 +35,17 @@ class LinkResourceSpec extends Specification {
         3 | "http://grails.github.io/grails-doc/2.5.1/ref/Constraints/url.html" | true
 
     }
+    def "checking url toString"() {
+        given:
+        LinkResource linkResource = new LinkResource(url: url)
+        when:
+        String result = linkResource.toString()
+
+        then:
+        result == resultant
+        where:
+        url                           | resultant
+        "http://localhost/admin.html" | "Url is :http://localhost/admin.html"
+        null                          | "Url is :null"
+    }
 }

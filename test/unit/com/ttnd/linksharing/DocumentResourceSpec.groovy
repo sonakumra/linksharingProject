@@ -35,4 +35,21 @@ class DocumentResourceSpec extends Specification {
         2 | null | false
         3 | "/home/sona" | true
     }
+
+
+    def "test case for toString "() {
+
+        given:
+        User user = new User(firstName: "sona", lastName: "kumra", email: "a@b.com", password: "qwerty", username: "abc")
+        Topic topic = new Topic(name: "grails", visibility:Visibility.PRIVATE, createdBy: user)
+        DocumentResource documentResource = new DocumentResource(filePath: filePath, description: "this is helpfull", topic: topic, createdBy: user)
+        when:
+        String result = documentResource.toString()
+        then:
+        result==resultant
+        where:
+        filePath      | resultant
+        "/home/sona" | "/home/sona"
+
+    }
 }

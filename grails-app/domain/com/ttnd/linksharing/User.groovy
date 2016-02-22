@@ -9,10 +9,12 @@ class User {
     byte[] photo;
     Boolean admin;
     Boolean active;
+    //String confirmPassword;
     Date lastUpdated;
     Date dateCreated;
 
-    static transients = ['name']
+    //static transients = ['name','confirmPassword']
+   // static transients = ['confirmPassword']
 
 
     static constraints = {
@@ -24,6 +26,13 @@ class User {
         active nullable: true
         photo nullable: true
         username blank:false
+      //  confirmPassword(nullable: true, blank: true, validator: { confirmPassword, obj ->
+           // Integer id = 0
+           // id = obj.getId()
+           //// if (!obj.id && obj.password != confirmPassword) {
+               // "password.mismatch.confirmPassword"
+            //}
+       // })
 
 
     }
