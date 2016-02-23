@@ -2,11 +2,12 @@ package com.ttnd.linksharing
 
 class ReadingItem {
 
-    Resources resources
+    Resource resources
     User user
     Boolean isRead
     static constraints = {
         resources unique: 'user'
     }
+    static belongsTo = [resources:Resource]
 
 }

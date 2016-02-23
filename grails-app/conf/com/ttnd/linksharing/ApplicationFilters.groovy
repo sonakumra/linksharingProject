@@ -5,9 +5,9 @@ class ApplicationFilters {
         all(controller: '*', action: '*') {
             before = {
                 def user = session['user']
-                if (!user) {
-                    redirect(action: 'index', controller: 'Login', id: user.id)
-                }
+//                if (!user) {
+//                    redirect(action: 'index', controller: 'login', id: user.id)
+//                }
             }
             after = { Map model ->
 

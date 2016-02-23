@@ -15,7 +15,7 @@ class UserSpec extends Specification {
     def cleanup() {
     }
 
-    void "test username and email"() {
+   /* void "test username and email"() {
         setup: "user creating email"
         User user = new User(firstName: firstName, lastName: lastName, email: email, password: password, username: username)
 
@@ -66,7 +66,7 @@ class UserSpec extends Specification {
         User.count() == 1
         newUser.errors.allErrors.size() == 1
         newUser.errors.getFieldErrorCount('email') == 1
-    }
+    }*/
 
 
     def "Checking the toString method"() {

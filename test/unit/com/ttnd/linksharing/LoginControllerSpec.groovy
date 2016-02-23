@@ -1,6 +1,7 @@
 package com.ttnd.linksharing
 
 import grails.test.mixin.TestFor
+import org.springframework.stereotype.Controller
 import spock.lang.Specification
 
 /**
@@ -16,5 +17,49 @@ class LoginControllerSpec extends Specification {
     }
 
     void "test something"() {
+    }
+
+    void "when user is available for login"() {
+        setup: ""
+        User user = new User(firstName: "sona", lastName: "kumra", email: "sona@tothenew.com", password: Constants.PASSWORD, username: "sona", confirmPassword: Constants.PASSWORD)
+        session.user = user
+        when: ""
+        controller.index()
+        then: ""
+        response.forwardedUrl == "/user/index"
+
+    }
+
+    void "when user is not available"() {
+        when: ""
+        controller.index()
+        then: ""
+        response.text == "Sorry,. Please try again."
+
+    }
+    /*void "login handler when user login "(){
+        setup:"user is active"
+        User user = new User(firstName:"sona", lastName:"kumra", email: "sona@tothenew.com", password:Constants.PASSWORD, username:"sona",confirmPassword:Constants.PASSWORD,active:true  )
+        when:""
+        controller.loginHandler("sona","default")
+        then:""
+        session.user==user
+        response.redirectUrl=='/login/index'
+    }*/
+    void "user logout"(){
+        setup:""
+        User user = new User(firstName: "sona", lastName: "kumra", email: "sona@tothenew.com", password: Constants.PASSWORD, username: "sona", confirmPassword: Constants.PASSWORD)
+        session.user = user
+
+        when:""
+        controller.logout()
+
+        then:""
+        flash.message == "Goodbye"
+        session.invalidate()==true
+        response.redirectUrl=="/login/index"
+
+
+
     }
 }

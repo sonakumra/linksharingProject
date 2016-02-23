@@ -5,4 +5,10 @@ enum Seriousness {
     VERY_SERIOUS,
     CASUAL
 
+    static getSeriousness(String serious) {
+
+        String seriousInUpperCase = serious.toUpperCase()
+        return valueOf(seriousInUpperCase)
+
+    }
 }

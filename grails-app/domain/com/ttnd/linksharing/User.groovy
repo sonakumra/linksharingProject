@@ -9,12 +9,12 @@ class User {
     byte[] photo;
     Boolean admin;
     Boolean active;
-    //String confirmPassword;
+    String confirmPassword;
     Date lastUpdated;
     Date dateCreated;
 
-    //static transients = ['name','confirmPassword']
-   // static transients = ['confirmPassword']
+    static transients = ['name','confirmPassword']
+   //static transients = ['confirmPassword']
 
 
     static constraints = {
@@ -26,18 +26,18 @@ class User {
         active nullable: true
         photo nullable: true
         username blank:false
-      //  confirmPassword(nullable: true, blank: true, validator: { confirmPassword, obj ->
-           // Integer id = 0
-           // id = obj.getId()
-           //// if (!obj.id && obj.password != confirmPassword) {
-               // "password.mismatch.confirmPassword"
-            //}
-       // })
+        confirmPassword(nullable: true, blank: true,bindable:true, validator: { confirmPassword, obj ->
+            Integer id = 0
+            id = obj.getId()
+            if (!obj.id && obj.password != confirmPassword) {
+                "password.mismatch.confirmPassword"
+            }
+        })
 
 
     }
     static  hasMany =[topics:Topic, subscribtion:Subscription,
-                      readingItems:ReadingItem,resources:Resources]
+                      readingItems:ReadingItem,resources:Resource]
     String getName()
     {
         [this.firstName,this.lastName].join(' ')
@@ -49,5 +49,6 @@ class User {
 
     static mapping = {
         photo sqlType: 'longblob'
+        id sort:'desc'
     }
 }

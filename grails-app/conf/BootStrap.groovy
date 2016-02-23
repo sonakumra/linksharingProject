@@ -3,7 +3,7 @@ import com.ttnd.linksharing.DocumentResource
 import com.ttnd.linksharing.LinkResource
 import com.ttnd.linksharing.ReadingItem
 import com.ttnd.linksharing.ResourceRating
-import com.ttnd.linksharing.Resources
+import com.ttnd.linksharing.Resource
 import com.ttnd.linksharing.Seriousness
 import com.ttnd.linksharing.Subscription
 import com.ttnd.linksharing.Topic
@@ -19,7 +19,7 @@ class BootStrap {
         println(grailsApplication.config.grails.sample)
         List<User> users = createUsers()
         List<Topic> topics = createTopic(users)
-        List<Resources> resources = createResource(topics)
+        List<com.ttnd.linksharing.Resource> resources = createResource(topics)
         subscriptionTopic(users, topics)
         List<ReadingItem> readingItems = createReadingItems()
         List<ResourceRating> resourceRatings = createResourceRatings(readingItems)
@@ -32,8 +32,9 @@ class BootStrap {
         User user = User.findByEmail(Constants.USER_EMAIL)
         User user1 = User.findByEmail(Constants.ADMIN_EMAIL)
         if (!(user)) {
-            user = new User(firstName: "sona", lastName: "kumra", email: Constants.USER_EMAIL, password: Constants.PASSWORD, username: "sonakumra")
-            if (user.save(flush: true, failOnError: true)) {
+            user = new User(firstName: "sona", lastName: "kumra", email: Constants.USER_EMAIL, password: Constants.PASSWORD, username: "sonakumra",confirmPassword:Constants.PASSWORD, active: true)
+            user.confirmPassword="default"
+             if (user.save(flush: true, failOnError: true)) {
                 users.add(user)
                 log.info "User ${user} saved successfully"
             } else {
@@ -42,7 +43,8 @@ class BootStrap {
         }
         if (!(user1)) {
 
-            user1 = new User(firstName: "madhav", lastName: "kumra", email: Constants.ADMIN_EMAIL, password: Constants.PASSWORD, username: "sonakumra", admin: true)
+            user1 = new User(firstName: "madhav", lastName: "kumra", email: Constants.ADMIN_EMAIL, password: Constants.PASSWORD, username: "sonakumra", admin: true,confirmPassword:Constants.PASSWORD )
+            user1.confirmPassword="default"
             if (user1.save(flush: true, failOnError: true)) {
                 users.add(user1)
                 log.info "User ${user1} saved successfully"
@@ -87,16 +89,16 @@ class BootStrap {
         }
     }
 
-    List<Resources> createResource(List<Topic> topics) {
-        List<Resources> resources = []
+    List<com.ttnd.linksharing.Resource> createResource(List<Topic> topics) {
+        List<com.ttnd.linksharing.Resource> resources = []
 
         topics.each { Topic topic ->
-            Integer countResources = Resources.countByTopic(topic)
+            Integer countResources = com.ttnd.linksharing.Resource.countByTopic(topic)
             if (!countResources) {
                 2.times {
-                    Resources documentResource = new DocumentResource(description: "topic ${topic} doc", createdBy: topic
+                    com.ttnd.linksharing.Resource documentResource = new DocumentResource(description: "topic ${topic} doc", createdBy: topic
                             .createdBy, filePath: "file/path", topic: topic)
-                    Resources linkResource = new LinkResource(description: "topic ${topic} link", createdBy: topic
+                    com.ttnd.linksharing.Resource linkResource = new LinkResource(description: "topic ${topic} link", createdBy: topic
                             .createdBy, url: "https://www.google.co.in", topic: topic)
                     if (documentResource.save(flush: true, failOnError: true)) {
                         log.info "document resource ${documentResource} saved"
@@ -143,7 +145,7 @@ class BootStrap {
     List<ReadingItem> createReadingItems() {
         List<User> users = User.list()
         List<Topic> topics = Topic.list()
-        List<Resources> resources = Resources.list()
+        List<com.ttnd.linksharing.Resource> resources = com.ttnd.linksharing.Resource.list()
         List<ReadingItem> readingItems = []
 
         users.each { user ->

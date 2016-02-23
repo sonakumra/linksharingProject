@@ -5,23 +5,25 @@ import javax.websocket.Session
 class LoginController {
 
     def index() {
-        User user = User.findByUsernameAndPassword(params.username,params.password)
+        //User user = User.findByUsernameAndPassword(params.username,params.password)
         if(session.user){
-            flash.message = "Hello ${user.firstName}!"
-            redirect(controller:UserController)
-        }else{
-            flash.message = "Sorry, ${params.username}. Please try again."
-
+            User user=session.user
+            //flash.message = "Hello ${user.firstName}!"
+            forward(controller:'user',action: 'index')
+        }else {
+            flash.message = "Sorry,. Please try again."
+            render flash.message
         }
     }
     def loginHandler(String username,String password){
-        User user = User.findByUsernameAndPassword(params.username,params.password)
+        User user = User.findByUsernameAndPassword(username,password)
         if(user) {
             if (user.active) {
                 session.user = user
-                redirect(controller: LoginController, action: index())
+                redirect(controller:'login', action: 'index')
             } else {
                 flash.error = 'Your accoutn is not active'
+                render "failure"
 
             }
         }
@@ -36,9 +38,9 @@ class LoginController {
 
     }
     def logout(){
-        flash.message = "Goodbye ${session.user.username}"
+        flash.message = "Goodbye"
         session.invalidate()
-        redirect(controller: 'Login' , action:'index')
+        redirect(controller: 'login' , action:'index')
 
     }
 }

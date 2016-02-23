@@ -14,7 +14,7 @@ class Topic {
        visibility(inlist: Visibility.values() as List );
     }
 
-    static hasMany = [subsciptions:Subscription,resources:Resources]
+    static hasMany = [subsciptions:Subscription,resources:Resource]
 
     def afterInsert() {
         Topic.withNewSession {
@@ -27,6 +27,9 @@ class Topic {
     {
         return name
 
+    }
+    static mapping = {
+        sort name:'asc'
     }
 
 

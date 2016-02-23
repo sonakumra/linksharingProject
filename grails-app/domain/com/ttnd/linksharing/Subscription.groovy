@@ -5,7 +5,7 @@ package com.ttnd.linksharing
 class Subscription {
     Topic topic
     User user
-    Seriousness seriousness
+    Seriousness seriousness="SERIOUS"
     Date dateCreated
 
 
@@ -19,4 +19,5 @@ class Subscription {
     void some(){
         user.topics
     }
+
 }

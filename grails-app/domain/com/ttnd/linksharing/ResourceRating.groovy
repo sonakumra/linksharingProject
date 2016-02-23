@@ -1,7 +1,7 @@
 package com.ttnd.linksharing
 
 class ResourceRating {
-    Resources resources
+    Resource resources
     User user
     Integer score
     static constraints = {
