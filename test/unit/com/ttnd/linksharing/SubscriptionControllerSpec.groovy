@@ -17,4 +17,5 @@ class SubscriptionControllerSpec extends Specification {
 
     void "test something"() {
     }
+
 }

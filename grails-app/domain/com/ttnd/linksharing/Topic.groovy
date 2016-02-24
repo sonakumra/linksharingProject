@@ -1,5 +1,7 @@
 package com.ttnd.linksharing
 
+import com.ttnd.linksharing.vo.TopicVO
+
 class Topic {
     String name;
     Date dateCreated;
@@ -31,8 +33,28 @@ class Topic {
     static mapping = {
         sort name:'asc'
     }
+     static  List<TopicVO> getTrendingTopics() {
+         List result = Account.createCriteria().list() {
+             projections {
+                 createAlias("branch", "b")
+                 groupProperty("b.id")
+                 property("b.name")
+                 sum("balance", 'totalBalance')
+             }
+             order("totalBalance", "desc")
+             order("b.name", "desc")
+         }
+         render "Result -> ${result}"
 
 
+
+        new TopicVO()
+    }
 
 }
+
+
+
+
+
 

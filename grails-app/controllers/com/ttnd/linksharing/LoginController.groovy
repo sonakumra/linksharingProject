@@ -40,7 +40,7 @@ class LoginController {
     def logout(){
         flash.message = "Goodbye"
         session.invalidate()
-        redirect(controller: 'login' , action:'index')
+        forward( action:'index')
 
     }
 }

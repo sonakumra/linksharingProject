@@ -17,4 +17,15 @@ class ResourceControllerSpec extends Specification {
 
     void "test something"() {
     }
+   /* def "CheckResourceDelete"() {
+        when:
+        controller.resourceDeletion(id)
+
+        then:
+        response.text == result
+
+        where:
+        id | result
+        11 | "Resource Deleted"
+    }*/
 }

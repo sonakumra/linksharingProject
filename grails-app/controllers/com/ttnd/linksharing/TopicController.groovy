@@ -1,13 +1,15 @@
 package com.ttnd.linksharing
 
+import com.ttnd.linksharing.co.ResourceSearchCO
+
 class TopicController {
 
     def index() {}
 
-    def show(Long id) {
+    def show(ResourceSearchCO co) {
         // long id= params.id
         log.info(id)
-        Topic topic = Topic.get(id)
+        Topic topic = Topic.get(co)
         log.info topic
         if (topic) {
             if (topic.visibility == Visibility.PUBLIC) {
