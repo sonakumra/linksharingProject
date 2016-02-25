@@ -49,4 +49,24 @@ abstract class Resource {
         new RatingInfoVO(totalVotes: result[0], averageScore: result[1], totalScore: result[2])
     }
 
+    public static List<Resource> getTopPosts() {
+
+        List<Resource> resources = []
+
+        def result = ResourceRating.createCriteria().list(max: 5) {
+            projections{
+                property('resources.id')
+            }
+
+            groupProperty('resources.id')
+            count('id', 'totalVotes')
+            order('totalVotes', 'desc')
+        }
+
+        List list = result.collect {it[0]}
+        resources = Resource.getAll(list)
+
+        return resources
+    }
+
 }

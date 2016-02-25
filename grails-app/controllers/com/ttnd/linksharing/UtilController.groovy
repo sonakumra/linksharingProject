@@ -11,5 +11,19 @@ class UtilController {
         log.warn("Sample Warn")
         if(log.isFatalEnabled())
         log.fatal("Sample Fatal")
+
+        render view: 'form'
     }
+    def save(User user)
+    {
+        if(user?.hasErrors()){
+            render view: 'form', model: [user: user ]
+        }else {
+            user.save()
+            render 'user saved'
+        }
+
+    }
+
 }
+

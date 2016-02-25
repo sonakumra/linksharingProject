@@ -34,21 +34,26 @@ class Topic {
         sort name:'asc'
     }
      static  List<TopicVO> getTrendingTopics() {
-         List result = Account.createCriteria().list() {
+
+
+         List result = Resource.createCriteria().list {
              projections {
-                 createAlias("branch", "b")
-                 groupProperty("b.id")
-                 property("b.name")
-                 sum("balance", 'totalBalance')
+                 createAlias("topic", "t")
+                 groupProperty("t.id")
+                 property("t.name")
+                 property("t.visibility")
+                 count("resource.id", 'totalResorces')
+                 property("t.createdBy")
              }
-             order("totalBalance", "desc")
-             order("b.name", "desc")
+             eq("t.visibility",Visibility.PUBLIC)
+             order("totalResources", "desc")
+             order("t.name", "desc")
+             maxResults 5
+             firstResult 0
          }
-         render "Result -> ${result}"
 
+         new TopicVO(id:result[0],name:result[1],visibility:result[2],count:result[3],createdBy:result[4])
 
-
-        new TopicVO()
     }
 
 }

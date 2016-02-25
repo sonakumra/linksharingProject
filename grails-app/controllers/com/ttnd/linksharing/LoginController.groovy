@@ -13,6 +13,10 @@ class LoginController {
         }else {
             flash.message = "Sorry,. Please try again."
             render flash.message
+
+            def result = Resource.getTopPosts()
+
+            render result
         }
     }
     def loginHandler(String username,String password){
