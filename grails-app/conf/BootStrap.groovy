@@ -130,7 +130,7 @@ class BootStrap {
                 topics.each
                         {
                             topic ->
-                                if (!Subscription.findByUserAndTopic(user, topic)) {
+                                if (!Subscription.findByUserAndTopic(user, topic)&&topic.createdBy!=user) {
                                     Subscription subscription = new Subscription(user: user, topic: topic, seriousness: Seriousness.VERY_SERIOUS)
 
                                     if (subscription.save())

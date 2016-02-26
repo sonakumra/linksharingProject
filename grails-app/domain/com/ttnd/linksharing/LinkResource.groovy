@@ -7,7 +7,7 @@ class LinkResource extends Resource {
         url url: true
     }
     String toString(){
-        return "Url is :${url}"
+        return this.url
     }
 
 }

@@ -10,10 +10,11 @@ class User {
     Boolean admin;
     Boolean active;
     String confirmPassword;
+    String subscribedTopic
     Date lastUpdated;
     Date dateCreated;
 
-    static transients = ['name','confirmPassword']
+    static transients = ['name','confirmPassword','subscribedTopic']
    //static transients = ['confirmPassword']
 
 
@@ -33,6 +34,7 @@ class User {
                 "password.mismatch.confirmPassword"
             }
         })
+        subscribedTopic bindable: true
 
 
     }
@@ -50,5 +52,8 @@ class User {
     static mapping = {
         photo sqlType: 'longblob'
         id sort:'desc'
+    }
+    String getSubscribedTopic(){
+      return subscribedTopic;
     }
 }

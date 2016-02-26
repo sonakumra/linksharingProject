@@ -31,6 +31,14 @@ class TestController {
         // User.executeUpdate("delete User where id=:id", [id: 1.toLong()])
         // render "Success"
     }
+    def getTopicNames(){
+
+        List<Topic> topics = Topic.list()
+        topics.each {
+            render "${it}"
+        }
+    }
+
 
 }
 

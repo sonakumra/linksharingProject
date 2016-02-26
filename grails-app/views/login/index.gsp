@@ -81,7 +81,10 @@
                             <span class="text-muted">@uday 21 jul 2014</span>
                             <span class="text-primary pull-right">Grails</span>
                             <div class="panel-body text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                                <g:each in="${result}">
+                                    <a href="${it}">${it}</a> <br>
+                                </g:each>
+
                             </div>
                             <div class="panel-footer">
                                 <a href="#"><span class="fa fa-facebook-square" style="font-size:20px"></span></a>
@@ -102,18 +105,18 @@
                     Login
                 </div>
                 <div class="panel-body">
-                    <form class="form">
+                    <g:form class="form" controller="login" action="loginHandler">
                         <div class="table-responsive">
                             <table class="table-condensed">
                                 <tr>
                                     <td>
                                         <div class="form-group">
-                                            <label for="username">E-Mail/UserName *</label>
+                                            <label for="username">UserName *</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="text" id="username" name="username" required>
+                                            <g:textField id="username" name="username"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -125,7 +128,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="password" id="password" name="password" required>
+                                            <g:passwordField id="password" name="password"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -137,13 +140,13 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-default btn-primary" id="loginBtn" value="Login">
+                                            <g:submitButton name="submit" class="btn btn-default btn-primary" id="loginBtn" value="Login"/>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                    </form>
+                    </g:form>
                 </div>
             </div>
         </div>

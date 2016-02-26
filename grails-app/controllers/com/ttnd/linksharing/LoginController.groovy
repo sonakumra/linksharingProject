@@ -12,11 +12,13 @@ class LoginController {
             forward(controller:'user',action: 'index')
         }else {
             flash.message = "Sorry,. Please try again."
-            render flash.message
+//            render flash.message
+//
+                List<Resource> result = Resource.getTopPosts()
+                render (view:'index',model:[result:result])
 
-            def result = Resource.getTopPosts()
-
-            render result
+//
+//            render result
         }
     }
     def loginHandler(String username,String password){

@@ -37,4 +37,24 @@ class ResourceController {
             ratingInfoVO
         }
     }
+    def saveLinkResource(String url, String description, String topicName){
+        User user=session.user
+        Topic topic=Topic.findByNameAndCreatedBy(topicName,user)
+        Resource linkResource=new LinkResource(url: url,description: description,createdBy: user,topic: topic)
+        if(linkResource.validate()){
+            linkResource.save(flush: true)
+            flash.message="Link Resource Saved"
+            render flash.message
+        }
+        else{
+            def err
+            if(linkResource.hasErrors()) {
+                err = linkResource.errors
+            }
+            render text: "Link Resource not Saved"+err
+           // render "problrmmmmmmmmmm"
+            redirect(controller: 'user',action: 'index')
+
+        }
+    }
 }
