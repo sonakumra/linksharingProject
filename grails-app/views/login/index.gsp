@@ -3,8 +3,10 @@
 <html>
 <head>
     <meta name="layout" content="application">
+
 </head>
 <body>
+
 <div class="row">
     <div class="col-md-7">
         <div class="row".>
@@ -135,7 +137,7 @@
                                 <tr>
                                     <td>
                                         <div class="form-group">
-                                            <a href="#">Forgot Password</a>
+                                            <a href="" class="col-xs-4" data-toggle="modal" data-target="#forgotPassword">Forgot Password</a>
                                         </div>
                                     </td>
                                     <td>
@@ -156,7 +158,7 @@
                     Register
                 </div>
                 <div class="panel-body">
-                    <form class="form">
+                    <g:form class="form" controller="user" action="register" >
                         <div class="table-responsive">
                             <table class="table-condensed">
                                 <tr>
@@ -167,7 +169,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="text" id="firstname" name="firstname" required>
+                                            <g:textField type="text" id="firstname" name="firstName"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -179,7 +181,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="text" id="lastname" name="lastname" required>
+                                            <g:textField type="text" id="lastname" name="lastName"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -191,7 +193,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="email" id="email" name="email" required>
+                                            <g:field type="email" id="email" name="email"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -203,7 +205,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="text" id="usernameReg" name="usernameReg" required>
+                                            <g:field type="text" id="usernameReg" name="username"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -215,19 +217,19 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="password" id="passwordReg" name="passwordReg" required>
+                                            <g:passwordField type="password" id="passwordReg" name="password"/>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="form-group">
-                                            <label for="confirmpasswordReg">Confirm Password *</label>
+                                            <label for="confirmpassword">Confirm Password *</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="password" id="confirmpasswordReg" name="confirmpasswordReg" required>
+                                            <g:passwordField type="password" id="confirmpassword" name="confirmPassword"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -239,7 +241,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="file" id="photo" name="photo" value="Browse" required>
+                                            <input type="file" id="photo" name="photo" value="Browse">
                                         </div>
                                     </td>
                                 </tr>
@@ -247,13 +249,13 @@
                                     <td></td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-default btn-primary" id="loginBtn" value="Login">
+                                            <g:submitButton name="submit" type="submit" class="btn btn-default btn-primary" id="loginBtn" value="Login"/>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                    </form>
+                    </g:form>
                 </div>
             </div>
         </div>

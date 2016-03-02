@@ -1,5 +1,8 @@
 package com.ttnd.linksharing
 
+import com.ttnd.linksharing.vo.TopicVO
+
+
 class UserController {
 
     def index() {
@@ -10,7 +13,13 @@ class UserController {
        // List topicsOfUserList=Topic.getTopicsOfAUser(user)
        // render (view:'index',model:[topicsOfUser:topicsOfUserList])
         List subscriptionList = Subscription.getSubscribedTopic(user)
-        render(view:'index',model:[subscriptionTopic:subscriptionList] )
+        List<TopicVO>topicVOList=Topic.getTrendingTopics()
+        List<ReadingItem> readingItems = ReadingItem.findAllByUser(user)
+        render(view:'index',model:[subscriptionTopic:subscriptionList,topicVOList:topicVOList,readingItems:readingItems ] )
+
+      //  UserVO userDetail=session.user.getUserDetails()
+     //   render (view:'index', model:[subscribedTopics:session.user.subscribedTopics,topicVOList:topicVOList,
+                                   //  userDetails:userDetail])
 
     }
 

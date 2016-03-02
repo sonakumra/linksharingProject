@@ -31,30 +31,34 @@ class BootStrap {
 
         User user = User.findByEmail(Constants.USER_EMAIL)
         User user1 = User.findByEmail(Constants.ADMIN_EMAIL)
-        if (!(user)) {
-            user = new User(firstName: "sona", lastName: "kumra", email: Constants.USER_EMAIL, password: Constants.PASSWORD, username: "sonakumra",confirmPassword:Constants.PASSWORD, active: true)
-            user.confirmPassword="default"
-             if (user.save(flush: true, failOnError: true)) {
-                users.add(user)
-                log.info "User ${user} saved successfully"
-            } else {
-                log.error "Error saving user : ${user.errors.allErrors}"
+        try {
+            if (!(user)) {
+                user = new User(firstName: "sona", lastName: "kumra", email: Constants.USER_EMAIL, password: Constants.PASSWORD, username: "sonakumra", confirmPassword: Constants.PASSWORD, active: true)
+                user.confirmPassword = "default"
+                if (user.save(flush: true, failOnError: true)) {
+                    users.add(user)
+                    log.info "User ${user} saved successfully"
+                } else {
+                    log.error "Error saving user : ${user.errors.allErrors}"
+                }
             }
-        }
-        if (!(user1)) {
+            if (!(user1)) {
 
-            user1 = new User(firstName: "madhav", lastName: "kumra", email: Constants.ADMIN_EMAIL, password: Constants.PASSWORD, username: "sonakumra", admin: true,confirmPassword:Constants.PASSWORD )
-            user1.confirmPassword="default"
-            if (user1.save(flush: true, failOnError: true)) {
-                users.add(user1)
-                log.info "User ${user1} saved successfully"
-            } else {
-                log.error "Error saving user : ${user1.errors.allErrors}"
+                user1 = new User(firstName: "madhav", lastName: "kumra", email: Constants.ADMIN_EMAIL, password: Constants.PASSWORD, username: "sonakumra", admin: true, confirmPassword: Constants.PASSWORD)
+                user1.confirmPassword = "default"
+                if (user1.save(flush: true, failOnError: true)) {
+                    users.add(user1)
+                    log.info "User ${user1} saved successfully"
+                } else {
+                    log.error "Error saving user : ${user1.errors.allErrors}"
+                }
             }
+
+
+            users
+        }catch (Exception e){
+            log.info e.message
         }
-
-
-        users
     }
 
     List<Topic> createTopic(List<User> users) {

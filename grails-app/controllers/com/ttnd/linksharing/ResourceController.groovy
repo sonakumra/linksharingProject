@@ -7,7 +7,7 @@ class ResourceController {
 
     def index() {}
 
-    def resourceDeletion(Long id) {//?????runn
+    def resourceDeletion(Long id) {//????
 
 
         try {

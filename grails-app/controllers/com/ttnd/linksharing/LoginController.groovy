@@ -10,12 +10,15 @@ class LoginController {
             User user=session.user
             //flash.message = "Hello ${user.firstName}!"
             forward(controller:'user',action: 'index')
+
+
         }else {
             flash.message = "Sorry,. Please try again."
 //            render flash.message
 //
                 List<Resource> result = Resource.getTopPosts()
-                render (view:'index',model:[result:result])
+
+                 render (view:'index',model:[result:result])
 
 //
 //            render result

@@ -28,6 +28,7 @@
 <body>
 <g:render template="/topic/create"/>
 <g:render template="/resource/linkCreate"/>
+<g:render template="/user/forgetPassword"/>
 <nav class="navbar">
     <div class="container" style="border:2px solid black;border-radius:25px;">
         <div class="row">
