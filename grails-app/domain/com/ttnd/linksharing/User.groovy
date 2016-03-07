@@ -14,20 +14,20 @@ class User {
     Date lastUpdated;
     Date dateCreated;
 
-    static transients = ['name','confirmPassword','subscribedTopic']
-   //static transients = ['confirmPassword']
+    static transients = ['name', 'confirmPassword', 'subscribedTopic']
+    //static transients = ['confirmPassword']
 
 
     static constraints = {
-        email unique: true , email: true, blank: false
-        password blank:false,minSize: 5
+        email unique: true, email: true, blank: false
+        password blank: false, minSize: 5
         firstName blank: false
         lastName blank: false
         admin nullable: true
         active nullable: true
         photo nullable: true
-        username blank:false
-        confirmPassword(nullable: true, blank: true,bindable:true, validator: { confirmPassword, obj ->
+        username blank: false
+        confirmPassword(nullable: true, blank: true, bindable: true, validator: { confirmPassword, obj ->
             Integer id = 0
             id = obj.getId()
             if (!obj.id && obj.password != confirmPassword) {
@@ -38,22 +38,34 @@ class User {
 
 
     }
-    static  hasMany =[topics:Topic, subscribtion:Subscription,
-                      readingItems:ReadingItem,resources:Resource]
-    String getName()
-    {
-        [this.firstName,this.lastName].join(' ')
+    static hasMany = [topics      : Topic, subscribtion: Subscription,
+                      readingItems: ReadingItem, resources: Resource]
+
+    String getName() {
+        [this.firstName, this.lastName].join(' ')
 
     }
-    String toString(){
+
+    String toString() {
         return username
     }
 
     static mapping = {
         photo sqlType: 'longblob'
-        id sort:'desc'
+        id sort: 'desc'
     }
-    String getSubscribedTopic(){
-      return subscribedTopic;
+
+    String getSubscribedTopic() {
+        return subscribedTopic;
+    }
+
+    static Boolean canDeleteResource(User user, Long id) {
+        Resource resource = Resource.read(id)
+        if (user.admin || resource.createdBy.id == user.id) {
+            return true
+        } else {
+            return false
+        }
+
     }
 }

@@ -4,16 +4,21 @@ import com.ttnd.linksharing.co.ResourceSearchCO
 
 class TopicController {
 
-    def index() {}
+    def index() {
 
-    def show(ResourceSearchCO co) {
+
+    }
+
+    def show(Long id) {
         // long id= params.id
-        log.info(id)
-        Topic topic = Topic.get(co)
-        log.info topic
+        //log.info(id)
+        Topic topic = Topic.get(id)
+        println("======topic==${topic.id}")
+//        log.info topic
         if (topic) {
             if (topic.visibility == Visibility.PUBLIC) {
-                render("Succes")
+                render(view:'topicShow',model:[topic:topic,subscribedUsers:topic.subscribedUsers] )
+//                render("Succes")
             } else if (topic.visibility == Visibility.PRIVATE) {
                 User user = session["user"]
                 Subscription subscription = Subscription.findByTopicAndUser(topic, user)

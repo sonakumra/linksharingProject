@@ -10,6 +10,21 @@ class ReadingItem {
     }
     static belongsTo = [resources: Resource]
 
+    static def getResourceDetails(User user){
 
+     def result = ReadingItem.createCriteria().list{
+            projections{
+                property('resources.id')
+                property('isRead')
+                'resources'{
+                    property('url')
+                    property('filePath')
+                }
+            }
+            eq('user',user)
+        }
+        return result
+
+    }
 
 }

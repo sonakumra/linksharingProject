@@ -2,6 +2,8 @@ package com.ttnd.linksharing
 
 import com.ttnd.linksharing.co.ResourceSearchCO
 import com.ttnd.linksharing.vo.RatingInfoVO
+import com.ttnd.linksharing.vo.ResourceVo
+import com.ttnd.linksharing.vo.TopicVO
 
 abstract class Resource {
     String description;
@@ -68,5 +70,17 @@ abstract class Resource {
 
         return resources
     }
+    static Boolean checkResourceType(Long id) {
+        Resource resource = Resource.get(id)
+        if (resource.class.equals(LinkResource)) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+
+
+
 
 }

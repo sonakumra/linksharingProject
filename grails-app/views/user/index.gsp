@@ -9,6 +9,7 @@
 <html>
 <head>
     <meta name="layout" content="application">
+    <asset:javascript src="app.js"></asset:javascript>
     <title></title>
 </head>
 
@@ -176,14 +177,9 @@
                 <div class="panel-heading">
                     Trending Topics
                 </div>
+                <g:each in="${topicVOList}" var="tlist">
                 <div class="panel-body">
-                    <g:each in="${topicVOList}" var="topicVo">
-                        <div class="row">
-                        <div class="col-md-6 col-xs-6">
-                           <span class="text-primary">${topicVo.name}</span>
-                        </div>
-                        </div>
-                    </g:each>
+                    <g:render template="trendingTopics" model="[topic:tlist]"/>
 
                 </div>
 
@@ -218,7 +214,7 @@
                             <a href="#"><span class="fa fa-trash" style="font-size:20px"></span></a>
                         </div>
                     </div>
-                </div>
+                </div></g:each>
             </div>
         </div>
     </div>
@@ -229,8 +225,9 @@
                     <div class="panel-heading">
                         Inbox
                     </div>
+
                     <div class="panel-body">
-                        <g:each in="${readingItems}">
+                        <g:each in="${readingItems}" var="readingItem">
                         <div class="row">
                             <div class="col-md-2">
                                 <img src="#" class="img img-thumbnail img-responsive" alt="Image" id="uimg"
@@ -260,50 +257,16 @@
                                     <a href="#"><span class="fa fa-facebook-square" style="font-size:20px"></span></a>
                                     <a href="#"><span class="fa fa-tumblr" style="font-size:20px"></span></a>
                                     <a href="#"><span class="fa fa-google-plus" style="font-size:20px"></span></a>
-                                    <a href="#" class="pull-right">Download</a>
-                                    <a href="#" class="pull-right">View Full Site</a>
-                                    <ls:MarkRead isRead="${it.isRead}"></ls:MarkRead>
-                                    <a href="#" class="pull-right">View Post</a>
+                                    %{--<a href="#" class="pull-right">Download</a>--}%
+                                    %{--<a href="#" class="pull-right">View Full Site</a>--}%
+                                    <a href="#" style="margin-left: 180px">
+                                    <ls:checkType id="${readingItem[0]}" url="${readingItem[2]}" filePath="${readingItem[3]}"/>
+                                    <ls:markRead isRead="${readingItem[1]}" id="${readingItem[0]}" />
+                                    <g:link controller="user" action="viewPost">View Post</g:link>
                                 </div>
                             </div>
                         </div>
                         </g:each>
-                        %{--<div class="row">--}%
-                            %{--<div class="col-md-2">--}%
-                                %{--<img src="#" class="img img-thumbnail img-responsive" alt="Image" id="uimg"--}%
-                                     %{--style="width:75px;height:75px">--}%
-                            %{--</div>--}%
-                            %{--<div class="col-md-10">--}%
-                                %{--<div class="row">--}%
-                                    %{--<div class="col-md-3">--}%
-                                        %{--<span class="text-primary">sona kumra</span>--}%
-                                    %{--</div>--}%
-                                    %{--<div class="col-md-2">--}%
-                                        %{--<span class="text-muted">@sona</span>--}%
-                                    %{--</div>--}%
-                                    %{--<div class="col-md-2">--}%
-                                        %{--<span class="text-muted">5 min</span>--}%
-                                    %{--</div>--}%
-                                    %{--<div class="col-md-2 col-md-offset-3">--}%
-                                        %{--<span class="text-primary pull-right">Grails</span>--}%
-                                    %{--</div>--}%
-                                %{--</div>--}%
-                                %{--<div class="panel text-justify">--}%
-                                    %{--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor--}%
-                                    %{--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud--}%
-                    %{--+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis--}%
-                                %{--</div>--}%
-                                %{--<div class="panel-footer">--}%
-                                    %{--<a href="#"><span class="fa fa-facebook-square" style="font-size:20px"></span></a>--}%
-                                    %{--<a href="#"><span class="fa fa-tumblr" style="font-size:20px"></span></a>--}%
-                                    %{--<a href="#"><span class="fa fa-google-plus" style="font-size:20px"></span></a>--}%
-                                    %{--<a href="#" class="pull-right">Download</a>--}%
-                                    %{--<a href="#" class="pull-right">View Full Site</a>--}%
-                                    %{--<a href="#" class="pull-right">Mark as Read</a>--}%
-                                    %{--<a href="#" class="pull-right">View Post</a>--}%
-                                %{--</div>--}%
-                            %{--</div>--}%
-                        %{--</div>///--}%
                     </div>
                 </div>
             </div>
@@ -385,7 +348,7 @@
                                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</button>
                             </div>
                             <div class="col-sm-8">
-                                <button type="button" class="btn btn-primary btn-block">Invite</button>
+                                <button type="button" class="btn btn-primary btn-block">invite</button>
                             </div>
                         </div>
                     </form>

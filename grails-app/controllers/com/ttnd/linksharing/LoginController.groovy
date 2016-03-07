@@ -1,5 +1,7 @@
 package com.ttnd.linksharing
 
+import com.ttnd.linksharing.vo.ResourceVo
+
 import javax.websocket.Session
 
 class LoginController {
@@ -8,20 +10,19 @@ class LoginController {
         //User user = User.findByUsernameAndPassword(params.username,params.password)
         if(session.user){
             User user=session.user
-            //flash.message = "Hello ${user.firstName}!"
             forward(controller:'user',action: 'index')
 
 
         }else {
             flash.message = "Sorry,. Please try again."
-//            render flash.message
-//
+
+
                 List<Resource> result = Resource.getTopPosts()
+                List<Resource> recentShare=Resource.list([sort:'dateCreated',order:'desc',max:2 ])
 
-                 render (view:'index',model:[result:result])
+                 render (view:'index',model:[result:result,recentShares:recentShare])
 
-//
-//            render result
+
         }
     }
     def loginHandler(String username,String password){

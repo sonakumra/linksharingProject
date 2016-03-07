@@ -1,20 +1,42 @@
 package com.ttnd.linksharing
 
-class linksharingTagLib {
-    static defaultEncodeAs = [taglib: 'html']
-    //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
-    static namespace ="ls"
+import com.ttnd.linksharing.vo.TopicVO
 
-    def MarkRead = { attrs, body ->
+class linksharingTagLib {
+//    static defaultEncodeAs = [taglib: 'html']
+    //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
+    static namespace = "ls"
+
+    def markRead = { attrs, body ->
         User user = session.user
+        String link = "${createLink(controller: 'readingItem', action: 'changeIsRead', params: [id: attrs.id, isRead: !attrs.isRead])}"
         if (user) {
             if (attrs.isRead) {
-                out << "mark as unread"
+                out << "<a href=$link>Mark as Unread</a>"
             } else {
-                out << "mark as read"
+                out << "<a href=$link>Mark as Read</a>"
             }
 
 
         }
     }
+    def showTrendingTopics = {
+        List<TopicVO> trendingTopics = Topic.getTrendingTopics()
+        out << render(template: '/topic/trendingTopics', model: [trendingTopics: trendingTopics])
+    }
+    def checkType = { attrs, body ->
+
+        if (Resource.checkResourceType(attrs.id)) {
+            out << "<a href=${attrs.filePath}>Download</a>"
+        } else {
+            out << "<a href=${attrs.url} target='_blank'>View full site</a>"
+        }
+    }
+    def resourceDelete = { attrs, body ->
+        Long rId = attrs.id
+        if (User.canDeleteResource(session.user, rId)) {
+            out << "Delete"
+        }
+    }
+
 }

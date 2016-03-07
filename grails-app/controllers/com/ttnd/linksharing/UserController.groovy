@@ -14,12 +14,11 @@ class UserController {
        // render (view:'index',model:[topicsOfUser:topicsOfUserList])
         List subscriptionList = Subscription.getSubscribedTopic(user)
         List<TopicVO>topicVOList=Topic.getTrendingTopics()
-        List<ReadingItem> readingItems = ReadingItem.findAllByUser(user)
+        def readingItems =ReadingItem.getResourceDetails(user)
+
         render(view:'index',model:[subscriptionTopic:subscriptionList,topicVOList:topicVOList,readingItems:readingItems ] )
 
-      //  UserVO userDetail=session.user.getUserDetails()
-     //   render (view:'index', model:[subscribedTopics:session.user.subscribedTopics,topicVOList:topicVOList,
-                                   //  userDetails:userDetail])
+
 
     }
 
@@ -37,4 +36,10 @@ class UserController {
 
 
     }
+    def viewPost(){
+        User user = session.user
+        def readingItems =ReadingItem.getResourceDetails(user)
+        render(view:'viewPost',model:[readingItems:readingItems] )
+    }
+
 }

@@ -17,7 +17,7 @@ class Topic {
         visibility(inlist: Visibility.values() as List);
         subscribedUser bindable:true
     }
-    static transients=['subscribedUser']
+    static transients=['subscribedUsers']
 
 
     static hasMany = [subsciptions: Subscription, resources: Resource]
@@ -29,9 +29,9 @@ class Topic {
         }
 
     }
-    String getSubscribedUser(){
-        return subscribedUser
-    }
+//    String getSubscribedUser(){
+//        return subscribedUser
+//    }
 
 
     String toString() {
@@ -70,11 +70,16 @@ class Topic {
         List topicNames = topicList.collect { it.name }
         return topicNames
     }
-   /* static List getUsersOfTopic(Topic topic) {
-        List<User> userList = User.findAllByCreatedBy(topic)
-        List userNames = userList.collect { it.name }
-        return UserNames
-    }*/
+
+     List<User> getSubscribedUsers() {
+        List<User> SubscribedList = Subscription.createCriteria().list {
+            projections {
+                property('user')
+            }
+            eq('topic.id', id)
+        }
+        return SubscribedList
+    }
 
 
 }

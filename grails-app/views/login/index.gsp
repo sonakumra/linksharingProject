@@ -15,16 +15,36 @@
                     Recent Shares
                 </div>
                 <div class="panel-body">
+                    %{--<div class="row">--}%
+                        %{--<div class="col-md-3">--}%
+                            %{--<img src="#" class="img img-thumbnail img-responsive" alt="Image" id="uimg" style="width:150px;height:150px">--}%
+                        %{--</div>--}%
+                        %{--<div class="col-md-9 panel">--}%
+                            %{--<span class="text-primary">Uday Pratap Singh</span>--}%
+                            %{--<span class="text-muted">@uday 5 min</span>--}%
+                            %{--<span class="text-primary pull-right">Grails</span>--}%
+                            %{--<div class="panel-body text-justify">--}%
+                                %{--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis--}%
+                            %{--</div>--}%
+                            %{--<div class="panel-footer">--}%
+                                %{--<a href="#"><span class="fa fa-facebook-square" style="font-size:20px"></span></a>--}%
+                                %{--<a href="#"><span class="fa fa-tumblr" style="font-size:20px"></span></a>--}%
+                                %{--<a href="#"><span class="fa fa-google-plus" style="font-size:20px"></span></a>--}%
+                                %{--<a href="#" class="pull-right">View Post<span class="glyphicon glyphicon-arrow-up"></span></a>--}%
+                            %{--</div>--}%
+                        %{--</div>--}%
+                    %{--</div>--}%
+                    <g:each in="${recentShares}" var="resource">
                     <div class="row">
                         <div class="col-md-3">
                             <img src="#" class="img img-thumbnail img-responsive" alt="Image" id="uimg" style="width:150px;height:150px">
                         </div>
                         <div class="col-md-9 panel">
-                            <span class="text-primary">Uday Pratap Singh</span>
-                            <span class="text-muted">@uday 5 min</span>
-                            <span class="text-primary pull-right">Grails</span>
+                            <span class="text-primary">"${resource.createdBy}"</span>
+                            <span class="text-muted">@"${resource.dateCreated}"</span>
+                            <span class="text-primary pull-right">"${resource.topic}"</span>
                             <div class="panel-body text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                                 "${resource.description}"
                             </div>
                             <div class="panel-footer">
                                 <a href="#"><span class="fa fa-facebook-square" style="font-size:20px"></span></a>
@@ -33,26 +53,7 @@
                                 <a href="#" class="pull-right">View Post<span class="glyphicon glyphicon-arrow-up"></span></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="#" class="img img-thumbnail img-responsive" alt="Image" id="uimg" style="width:150px;height:150px">
-                        </div>
-                        <div class="col-md-9 panel">
-                            <span class="text-primary">Uday Pratap Singh</span>
-                            <span class="text-muted">@uday 10 min</span>
-                            <span class="text-primary pull-right">Grails</span>
-                            <div class="panel-body text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                            </div>
-                            <div class="panel-footer">
-                                <a href="#"><span class="fa fa-facebook-square" style="font-size:20px"></span></a>
-                                <a href="#"><span class="fa fa-tumblr" style="font-size:20px"></span></a>
-                                <a href="#"><span class="fa fa-google-plus" style="font-size:20px"></span></a>
-                                <a href="#" class="pull-right">View Post<span class="glyphicon glyphicon-arrow-up"></span></a>
-                            </div>
-                        </div>
-                    </div>
+                    </div></g:each>
                 </div>
             </div>
         </div>
@@ -83,9 +84,8 @@
                             <span class="text-muted">@uday 21 jul 2014</span>
                             <span class="text-primary pull-right">Grails</span>
                             <div class="panel-body text-justify">
-                                <g:each in="${result}">
-                                    <a href="${it}">${it}</a> <br>
-                                </g:each>
+
+                            <g:render template="topPost" model="[result:result]"></g:render>
 
                             </div>
                             <div class="panel-footer">
