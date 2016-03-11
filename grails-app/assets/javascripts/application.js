@@ -18,3 +18,47 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+function ajaxSuccess(result) {
+
+	if (result) {
+		var jsonResponseDiv = $(".jsonResponse");
+
+		if (result.message) {
+
+
+
+			jsonResponseDiv.text(result.message);
+			jsonResponseDiv.addClass("alert alert-success");
+		}
+		else {
+			jsonResponseDiv.text(result.error);
+			jsonResponseDiv.addClass("alert alert-danger");
+		}
+		jsonResponseDiv.css({'display': 'block'})
+	}
+}
+
+function hideSubscription(response) {
+    ajaxSuccess(response)
+    var topicId = response.id;
+    $(".panel-heading[data-topic-id='"+topicId+"']").hide('slow')
+    $(".panel-body[data-topic-id='"+topicId+"']").hide('slow')
+    $(".panel-footer[data-topic-id='"+topicId+"']").hide('slow')
+}
+
+	$(document).ready(function () {
+
+        console.log("ajax bind", $(".unsubscribe"));
+
+		$(".unsubscribe").click(function (e) {
+            console.log("after" +$(e.target).data('id'))
+			$.ajax({
+				url: "/subscription/delete",
+				data: {id: $(e.target).data('id')},
+				success: hideSubscription
+			});
+		});
+});
+
+

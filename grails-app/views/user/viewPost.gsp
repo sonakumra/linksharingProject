@@ -55,14 +55,14 @@
                 %{--<a href="#">--}%
                 %{--<ins> Delete</ins>--}%
                 %{--</a>--}%
-                <g:each in="${readingItems}">
-                    <%=readingItem%>
-                    <g:each in="${it[0][0]}" var="item">
-                        <%=item%>
-                        <ls:resourceDelete user="${session.user}" id="${item}"/>
-                    </g:each>
+                %{--<g:each in="${readingItems}">--}%
+                    %{--<%=readingItem%>--}%
+                    %{--<g:each in="${it[0][0]}" var="item">--}%
+                        %{--<%=item%>--}%
+                        %{--<ls:resourceDelete user="${session.user}" id="${item}"/>--}%
+                    %{--</g:each>--}%
 
-                </g:each>
+                %{--</g:each>--}%
             </span>
             <a href="#">
                 <ins>Edit</ins>
@@ -73,6 +73,7 @@
             <a href="#">
                 <ins>view full size</ins>
             </a>
+            <ls:resourceDelete id="${resource.id}"/>
 
 
         </div>

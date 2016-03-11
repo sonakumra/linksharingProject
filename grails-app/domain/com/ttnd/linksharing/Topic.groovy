@@ -8,14 +8,13 @@ class Topic {
     Date lastUpdated;
     Visibility visibility
     User createdBy
-    String subscribedUser
 
 
 
     static constraints = {
         name blank: false, unique: 'createdBy'
         visibility(inlist: Visibility.values() as List);
-        subscribedUser bindable:true
+
     }
     static transients=['subscribedUsers']
 
@@ -79,6 +78,26 @@ class Topic {
             eq('topic.id', id)
         }
         return SubscribedList
+    }
+
+    public Boolean isTopicPublic() {
+        if (visibility == Visibility.PUBLIC)
+            return true
+        return false
+    }
+    public Boolean canViewedBy(User user) {
+
+        if (this.isTopicPublic() || user.isAdmin || Subscription.findByUserAndTopic(user, this)) {
+            return true
+        }
+
+        return false
+
+    }
+    List<Resource> getPost()
+    {
+        List<Resource> post = Resource.findAllByTopic(this)
+        return post
     }
 
 

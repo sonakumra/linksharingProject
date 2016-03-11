@@ -27,7 +27,7 @@
 </div>
 
 <div class="col-xs-6">
-    <g:render template="showPost" model="[topics:topic]"/>
+    <g:render template="showPost" model="[topics:topic,post:post]"/>
 </div>
     </div>
 

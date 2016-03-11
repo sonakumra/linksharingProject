@@ -7,29 +7,33 @@ class ResourceController {
 
     def index() {}
 
-    def resourceDeletion(Long id) {//????
+    def delete(Long id) {
 
 
         try {
             Resource resource = Resource.load(id)
             resource.delete(flush: true)
+            flash.message = "resource deleted"
             render "Resource Deleted"
+            redirect(controller: 'user', action: 'index')
         }
         catch (Exception e) {
             render e.message
         }
 
     }
+
     def search(ResourceSearchCO co) {
-       if (co.q)
-           co.visiblity=Visiblity.PUBLIC
+        if (co.q)
+            co.visiblity = Visiblity.PUBLIC
         //println("co:${co.properties}")
-      //  List<Resource> resources = Resource.search(co).list()
-      //  render "resources $resources"
+        //  List<Resource> resources = Resource.search(co).list()
+        //  render "resources $resources"
 
 
     }
-    def show(Long id){
+
+    def show(Long id) {
 
         Resource resource = Resource.get(id)
         RatingInfoVO ratingInfoVO = resource.getRatingtInfo()
@@ -37,24 +41,47 @@ class ResourceController {
             ratingInfoVO
         }
     }
-    def saveLinkResource(String url, String description, String topicName){
-        User user=session.user
-        Topic topic=Topic.findByNameAndCreatedBy(topicName,user)
-        Resource linkResource=new LinkResource(url: url,description: description,createdBy: user,topic: topic)
-        if(linkResource.validate()){
+
+    def saveLinkResource(String url, String description, String topicName) {
+        User user = session.user
+        Topic topic = Topic.findByNameAndCreatedBy(topicName, user)
+        Resource linkResource = new LinkResource(url: url, description: description, createdBy: user, topic: topic)
+        if (linkResource.validate()) {
             linkResource.save(flush: true)
-            flash.message="Link Resource Saved"
+            flash.message = "Link Resource Saved"
             render flash.message
-        }
-        else{
+        } else {
             def err
-            if(linkResource.hasErrors()) {
+            if (linkResource.hasErrors()) {
                 err = linkResource.errors
             }
-            render text: "Link Resource not Saved"+err
-           // render "problrmmmmmmmmmm"
-            redirect(controller: 'user',action: 'index')
+            render text: "Link Resource not Saved" + err
+
+            redirect(controller: 'user', action: 'index')
 
         }
+    }
+
+    private def addToReadingItems(Resource resource) {
+
+        Topic topic = resource.topic
+        List userList = topic.getSubscribedUsers()
+
+        userList.each {
+            User user ->
+                if (Subscription.findByUserAndTopic(user, topic)) {
+                    if (resource.createdBy.id == user.id) {
+                        ReadingItem readingItem = new ReadingItem(isRead: true, user: user, resources: resource)
+
+                        user.addToReadingItems(readingItem)
+                    } else {
+                        ReadingItem readingItem = new ReadingItem(isRead: false, user: user, resources: resource)
+
+                        user.addToReadingItems(readingItem)
+                    }
+                }
+        }
+
+
     }
 }

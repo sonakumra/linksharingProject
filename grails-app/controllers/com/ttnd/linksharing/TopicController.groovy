@@ -14,11 +14,10 @@ class TopicController {
         //log.info(id)
         Topic topic = Topic.get(id)
         println("======topic==${topic.id}")
-//        log.info topic
         if (topic) {
             if (topic.visibility == Visibility.PUBLIC) {
-                render(view:'topicShow',model:[topic:topic,subscribedUsers:topic.subscribedUsers] )
-//                render("Succes")
+                List<Resource> post=topic.getPost()
+                render(view:'topicShow',model:[topic:topic,subscribedUsers:topic.subscribedUsers,post:post] )
             } else if (topic.visibility == Visibility.PRIVATE) {
                 User user = session["user"]
                 Subscription subscription = Subscription.findByTopicAndUser(topic, user)
@@ -42,7 +41,7 @@ class TopicController {
     def save(String topicName, String visibility) {
         User user = session.user
         println(user)
-        Topic topic = new Topic(name: topicName, createdBy: user, visibility: Visibility.getEnum(visibility))
+        Topic topic = new Topic(name: topicName, createdBy: user, visibility: Visibility.getEnum(visibility) )
         if (topic.validate() && topic.save()) {
             flash.message = "Successful registration"
             render flash.message

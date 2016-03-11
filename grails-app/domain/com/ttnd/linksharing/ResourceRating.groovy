@@ -8,5 +8,6 @@ class ResourceRating {
         score max: 5, min:1
         user unique: 'resources'
     }
+    static belongsTo = [resources: Resource]
 
 }

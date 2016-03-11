@@ -101,7 +101,7 @@ class BootStrap {
             if (!countResources) {
                 2.times {
                     com.ttnd.linksharing.Resource documentResource = new DocumentResource(description: "topic ${topic} doc", createdBy: topic
-                            .createdBy, filePath: "file/path", topic: topic)
+                            .createdBy, filePath: "file/path", topic: topic,contentType: "application/pdf")
                     com.ttnd.linksharing.Resource linkResource = new LinkResource(description: "topic ${topic} link", createdBy: topic
                             .createdBy, url: "https://www.google.co.in", topic: topic)
                     if (documentResource.save(flush: true, failOnError: true)) {

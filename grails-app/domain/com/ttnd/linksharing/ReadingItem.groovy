@@ -19,6 +19,7 @@ class ReadingItem {
                 'resources'{
                     property('url')
                     property('filePath')
+                    property('description')
                 }
             }
             eq('user',user)

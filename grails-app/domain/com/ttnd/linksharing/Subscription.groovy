@@ -20,9 +20,8 @@ class Subscription {
         user.topics
     }
 
-     static List getSubscribedTopic(User user){
-        List result = Subscription.createCriteria().list{
-             user=User.findByUsername(user)
+     static List<Topic> getSubscribedTopic(User user){
+        List<Topic> result = Subscription.createCriteria().list{
             projections{
                 property('topic')
 

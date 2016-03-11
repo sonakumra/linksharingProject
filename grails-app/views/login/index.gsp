@@ -85,7 +85,7 @@
                             <span class="text-primary pull-right">Grails</span>
                             <div class="panel-body text-justify">
 
-                            <g:render template="topPost" model="[result:result]"></g:render>
+                            <g:render template="/login/topPost" model="[result:result]"/>
 
                             </div>
                             <div class="panel-footer">
@@ -153,111 +153,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Register
-                </div>
-                <div class="panel-body">
-                    <g:form class="form" controller="user" action="register" >
-                        <div class="table-responsive">
-                            <table class="table-condensed">
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="firstname">First Name*</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <g:textField type="text" id="firstname" name="firstName"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="lastname">Last Name*</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <g:textField type="text" id="lastname" name="lastName"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="email">E-Mail *</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <g:field type="email" id="email" name="email"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="usernameReg">Username *</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <g:field type="text" id="usernameReg" name="username"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="passwordReg">Password *</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <g:passwordField type="password" id="passwordReg" name="password"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="confirmpassword">Confirm Password *</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <g:passwordField type="password" id="confirmpassword" name="confirmPassword"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="photo">Photo *</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <input type="file" id="photo" name="photo" value="Browse">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <div class="form-group">
-                                            <g:submitButton name="submit" type="submit" class="btn btn-default btn-primary" id="loginBtn" value="Login"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </g:form>
-                </div>
-            </div>
+            <g:render template="/login/register"/>
         </div>
     </div>
 </div>

@@ -23,11 +23,14 @@
     <asset:stylesheet src="bootstrap-theme.min.css"/>
     <asset:stylesheet src="font-awesome.min.css"/>
 
+
+
     <g:layoutHead/>
 </head>
 <body>
 <g:render template="/topic/create"/>
 <g:render template="/resource/linkCreate"/>
+<g:render template="/resource/documentCreate"/>
 <g:render template="/user/forgetPassword"/>
 <nav class="navbar">
     <div class="container" style="border:2px solid black;border-radius:25px;">
@@ -94,17 +97,23 @@
 </nav>
 
 
-<div class="container">
-    <g:if test="${flash.message}">
+%{--<div class="container">--}%
+    %{--<g:if test="${flash.message}">--}%
 
-    </g:if>
-    <g:if test="${flash.error}">
+    %{--</g:if>--}%
+    %{--<g:if test="${flash.error}">--}%
 
-    </g:if>
+    %{--</g:if>--}%
+
+    <div class="container">
+       <div class = "jsonResponse" style="display:none"></div>
+    </div>
+
     <g:layoutBody/>
 </div>
 
 
-
+<asset:javascript src="jquery.validate.min.js"/>
+<asset:javascript src="application.js"/>
 </body>
 </html>

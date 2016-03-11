@@ -32,7 +32,7 @@ abstract class Resource {
                     eq('id', co.topicId)
                     eq('visiblity', co.visiblity)
                 }
-                Resource.findAllById(co.topicId)
+                //Resource.findAllById(co.topicId)
             }
         }
     }
@@ -77,6 +77,13 @@ abstract class Resource {
         } else {
             return true
         }
+    }
+    public static canViewBy(User user,Long id) {
+        Resource resource = Resource.get(id)
+        if (resource.topic.canViewedBy(user)) {
+            return true
+        }
+        return false
     }
 
 

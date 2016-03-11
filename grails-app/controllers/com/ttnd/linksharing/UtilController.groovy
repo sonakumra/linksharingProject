@@ -24,6 +24,18 @@ class UtilController {
         }
 
     }
+    def testMail(){
+
+        sendMail {
+            to "sona@tothenew.com"
+            subject "Hello Fred"
+            body 'How are you?'
+        }
+    }
+
+    def try1(){
+     render params
+    }
 
 }
 

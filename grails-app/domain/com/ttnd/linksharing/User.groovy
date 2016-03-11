@@ -1,5 +1,7 @@
 package com.ttnd.linksharing
 
+import com.ttnd.linksharing.vo.UserVO
+
 class User {
     String email;
     String username;
@@ -21,7 +23,7 @@ class User {
     static constraints = {
         email unique: true, email: true, blank: false
         password blank: false, minSize: 5
-        firstName blank: false
+        firstName blank: false, nullable: false
         lastName blank: false
         admin nullable: true
         active nullable: true
@@ -50,6 +52,12 @@ class User {
         return username
     }
 
+    Map toMap() {
+        [email:email,
+        password:password,
+        firstName:firstName]
+    }
+
     static mapping = {
         photo sqlType: 'longblob'
         id sort: 'desc'
@@ -59,13 +67,44 @@ class User {
         return subscribedTopic;
     }
 
-    static Boolean canDeleteResource(User user, Long id) {
+    Boolean canDeleteResource(Long id) {
+
         Resource resource = Resource.read(id)
-        if (user.admin || resource.createdBy.id == user.id) {
+        if (this.admin || resource.createdBy.id == this.id) {
             return true
         } else {
             return false
         }
 
     }
+
+    public Integer getScore(Resource resource) {
+        ResourceRating resourceRating = ResourceRating.findByUserAndResources(this, resource)
+        return resourceRating.score
+    }
+
+    Boolean isSubscribed(Long topicId) {
+        Topic topic = Topic.load(topicId)
+        if (Subscription.findByUserAndTopic(this, topic)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    static List<Topic> getSubscribedTopics(Long id) {
+        List<Topic> topicList = Subscription.createCriteria().list() {
+            projections {
+                property('topic')
+            }
+            eq('user.id', id)
+        }
+        return topicList
+    }
+
+//    UserVO getUserDetails() {
+//        return new UserVO(userId: id,fname: firstName,userName:username , lname: lastName, email: email, image: photo, isAdmin: admin, isActive: active)
+//    }
+
+
 }
